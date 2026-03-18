@@ -63,9 +63,9 @@ export default function Home() {
                 initial={{ scale: 0 }}
                 animate={{ scale: 1 }}
                 transition={{ delay: 0.2, type: "spring", stiffness: 200 }}
-                className="w-24 h-24 flex items-center justify-center mx-auto mb-6"
+                className="w-32 md:w-40 h-auto flex items-center justify-center mx-auto mb-8"
               >
-                <img src="/logo.png" alt="Click Society Logo" className="w-full h-full object-contain drop-shadow-2xl" />
+                <img src="/logo.png" alt="Click Society Logo" className="w-full h-auto object-contain drop-shadow-2xl" />
               </motion.div>
               <h1 className="text-4xl md:text-5xl font-bold mb-4 tracking-tight">
                 Click Society <span className="gradient-text text-emerald-500">Notion - CRM</span>
