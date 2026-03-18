@@ -41,7 +41,7 @@ export default function AnalyticsView({ items, properties }: AnalyticsViewProps)
                 {/* Pie Chart Card */}
                 <div className="glass-card p-8 rounded-3xl border border-white/5 bg-black/20 flex flex-col h-[450px]">
                     <div className="flex items-center gap-3 mb-8">
-                        <div className="w-10 h-10 bg-purple-500/10 rounded-xl flex items-center justify-center text-purple-500">
+                        <div className="w-10 h-10 bg-green-500/10 rounded-xl flex items-center justify-center text-green-500">
                             <PieChartIcon size={20} />
                         </div>
                         <div>
@@ -78,7 +78,7 @@ export default function AnalyticsView({ items, properties }: AnalyticsViewProps)
                 {/* Line Chart Card */}
                 <div className="glass-card p-8 rounded-3xl border border-white/5 bg-black/20 flex flex-col h-[450px]">
                     <div className="flex items-center gap-3 mb-8">
-                        <div className="w-10 h-10 bg-blue-500/10 rounded-xl flex items-center justify-center text-blue-500">
+                        <div className="w-10 h-10 bg-emerald-500/10 rounded-xl flex items-center justify-center text-emerald-500">
                             <TrendingUp size={20} />
                         </div>
                         <div>

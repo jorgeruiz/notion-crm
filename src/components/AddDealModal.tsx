@@ -117,7 +117,7 @@ export default function AddDealModal({
                 >
                     <div className="p-6 border-b border-white/5 flex items-center justify-between">
                         <h3 className="text-xl font-bold text-white flex items-center gap-2">
-                            <Plus className="text-blue-500" size={24} />
+                            <Plus className="text-emerald-500" size={24} />
                             Add New Deal
                         </h3>
                         <button
@@ -142,7 +142,7 @@ export default function AddDealModal({
                                         required
                                         type="text"
                                         onChange={(e) => handleChange(p.name, e.target.value)}
-                                        className="w-full bg-white/5 border border-white/10 rounded-xl py-3 px-4 text-white focus:outline-none focus:ring-2 focus:ring-blue-500/50 transition-all"
+                                        className="w-full bg-white/5 border border-white/10 rounded-xl py-3 px-4 text-white focus:outline-none focus:ring-2 focus:ring-emerald-500/50 transition-all"
                                         placeholder={`Enter ${p.name.toLowerCase()}...`}
                                     />
                                 </div>
@@ -156,7 +156,7 @@ export default function AddDealModal({
                                 </label>
                                 <select
                                     onChange={(e) => handleChange(statusProp.name, e.target.value)}
-                                    className="w-full bg-white/5 border border-white/10 rounded-xl py-3 px-4 text-white focus:outline-none focus:ring-2 focus:ring-blue-500/50 transition-all appearance-none"
+                                    className="w-full bg-white/5 border border-white/10 rounded-xl py-3 px-4 text-white focus:outline-none focus:ring-2 focus:ring-emerald-500/50 transition-all appearance-none"
                                 >
                                     <option value="" className="bg-[#0f0f0f]">Select {statusProp.name.toLowerCase()}</option>
                                     {statusOptions.map((opt: any) => (
@@ -187,7 +187,7 @@ export default function AddDealModal({
                                         {p.type === "select" ? (
                                             <select
                                                 onChange={(e) => handleChange(p.name, e.target.value)}
-                                                className="w-full bg-white/5 border border-white/10 rounded-xl py-3 px-4 text-white focus:outline-none focus:ring-2 focus:ring-blue-500/50 transition-all"
+                                                className="w-full bg-white/5 border border-white/10 rounded-xl py-3 px-4 text-white focus:outline-none focus:ring-2 focus:ring-emerald-500/50 transition-all"
                                             >
                                                 <option value="" className="bg-[#0f0f0f]">Select...</option>
                                                 {p.select.options.map((opt: any) => (
@@ -201,7 +201,7 @@ export default function AddDealModal({
                                                 type={p.type === "number" ? "number" : p.type === "date" ? "date" : "text"}
                                                 step={p.type === "number" ? "any" : undefined}
                                                 onChange={(e) => handleChange(p.name, e.target.value)}
-                                                className="w-full bg-white/10 border border-white/10 rounded-xl py-3 px-4 text-white focus:outline-none focus:ring-2 focus:ring-blue-500/50 transition-all [color-scheme:dark]"
+                                                className="w-full bg-white/10 border border-white/10 rounded-xl py-3 px-4 text-white focus:outline-none focus:ring-2 focus:ring-emerald-500/50 transition-all [color-scheme:dark]"
                                                 placeholder={p.name}
                                             />
                                         )}
@@ -220,7 +220,7 @@ export default function AddDealModal({
                             <button
                                 type="submit"
                                 disabled={isSubmitting}
-                                className="flex-[2] bg-blue-600 hover:bg-blue-500 text-white font-bold py-3 rounded-xl shadow-lg shadow-blue-500/20 transition-all flex items-center justify-center gap-2"
+                                className="flex-[2] bg-emerald-600 hover:bg-emerald-500 text-white font-bold py-3 rounded-xl shadow-lg shadow-emerald-500/20 transition-all flex items-center justify-center gap-2"
                             >
                                 {isSubmitting ? (
                                     <Loader2 className="animate-spin" size={20} />

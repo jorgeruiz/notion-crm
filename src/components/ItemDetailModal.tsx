@@ -102,7 +102,7 @@ export default function ItemDetailModal({
                     {/* Header */}
                     <div className="p-8 border-b border-white/5 flex items-center justify-between bg-black/40">
                         <div>
-                            <span className="text-xs font-bold text-blue-500 uppercase tracking-widest mb-1 block">Deal Detail</span>
+                            <span className="text-xs font-bold text-emerald-500 uppercase tracking-widest mb-1 block">Deal Detail</span>
                             <h2 className="text-2xl font-bold text-white line-clamp-1">{name}</h2>
                         </div>
                         <button
@@ -152,11 +152,11 @@ export default function ItemDetailModal({
                                                             type={prop.type === "number" ? "number" : "text"}
                                                             value={editValue ?? value ?? ""}
                                                             onChange={(e) => setEditValue(e.target.value)}
-                                                            className="bg-white/10 border border-blue-500/50 rounded-lg px-3 py-1 text-sm text-white focus:outline-none w-full"
+                                                            className="bg-white/10 border border-emerald-500/50 rounded-lg px-3 py-1 text-sm text-white focus:outline-none w-full"
                                                         />
                                                         <button
                                                             onClick={() => handleUpdateProperty(key, prop.type)}
-                                                            className="p-1 bg-blue-600 rounded-md text-white hover:bg-blue-500"
+                                                            className="p-1 bg-emerald-600 rounded-md text-white hover:bg-emerald-500"
                                                         >
                                                             <Check size={16} />
                                                         </button>
@@ -201,7 +201,7 @@ export default function ItemDetailModal({
                                     <MessageSquare size={18} className="text-gray-500" />
                                     <h3 className="text-sm font-bold text-gray-400 uppercase tracking-wider">Discussion</h3>
                                 </div>
-                                {isLoadingComments && <Loader2 size={16} className="animate-spin text-blue-500" />}
+                                {isLoadingComments && <Loader2 size={16} className="animate-spin text-emerald-500" />}
                             </div>
 
                             <div className="space-y-6 mb-8">
@@ -213,7 +213,7 @@ export default function ItemDetailModal({
                                 )}
                                 {comments.map((comment) => (
                                     <div key={comment.id} className="flex gap-4">
-                                        <div className="w-8 h-8 rounded-full bg-gradient-to-br from-blue-500 to-purple-600 flex-shrink-0 flex items-center justify-center text-[10px] font-bold">
+                                        <div className="w-8 h-8 rounded-full bg-gradient-to-br from-emerald-500 to-green-600 flex-shrink-0 flex items-center justify-center text-[10px] font-bold">
                                             {comment.created_by?.name?.[0] || "?"}
                                         </div>
                                         <div className="flex-1">
@@ -239,12 +239,12 @@ export default function ItemDetailModal({
                                         value={newComment}
                                         onChange={(e) => setNewComment(e.target.value)}
                                         placeholder="Type a comment..."
-                                        className="w-full bg-white/5 border border-white/10 rounded-2xl p-4 text-sm text-white focus:outline-none focus:ring-2 focus:ring-blue-500/50 transition-all resize-none"
+                                        className="w-full bg-white/5 border border-white/10 rounded-2xl p-4 text-sm text-white focus:outline-none focus:ring-2 focus:ring-emerald-500/50 transition-all resize-none"
                                     />
                                     <button
                                         type="submit"
                                         disabled={isSendingComment || !newComment.trim()}
-                                        className="absolute bottom-4 right-4 p-2 bg-blue-600 hover:bg-blue-500 disabled:opacity-50 disabled:hover:bg-blue-600 text-white rounded-xl transition-all shadow-lg shadow-blue-500/20"
+                                        className="absolute bottom-4 right-4 p-2 bg-emerald-600 hover:bg-emerald-500 disabled:opacity-50 disabled:hover:bg-emerald-600 text-white rounded-xl transition-all shadow-lg shadow-emerald-500/20"
                                     >
                                         {isSendingComment ? <Loader2 className="animate-spin" size={18} /> : <Send size={18} />}
                                     </button>

@@ -243,7 +243,7 @@ export default function KanbanBoard({ initialData, dbId, onDisconnect }: KanbanP
             {/* Sidebar */}
             <aside className="w-64 border-r border-white/5 bg-black/20 backdrop-blur-xl flex flex-col p-6 hidden lg:flex">
                 <div className="flex items-center gap-3 mb-10 px-2">
-                    <div className="w-8 h-8 bg-blue-600 rounded-lg flex items-center justify-center">
+                    <div className="w-8 h-8 bg-emerald-600 rounded-lg flex items-center justify-center">
                         <LayoutDashboard size={18} />
                     </div>
                     <span className="font-bold text-xl tracking-tight">CRM Sync</span>
@@ -296,7 +296,7 @@ export default function KanbanBoard({ initialData, dbId, onDisconnect }: KanbanP
                             disabled={isLoading}
                             className={cn(
                                 "p-2 hover:bg-white/5 rounded-lg transition-colors text-gray-400",
-                                isLoading && "animate-spin text-blue-500"
+                                isLoading && "animate-spin text-emerald-500"
                             )}
                         >
                             <RefreshCw size={18} />
@@ -311,12 +311,12 @@ export default function KanbanBoard({ initialData, dbId, onDisconnect }: KanbanP
                                 placeholder="Search deals..."
                                 value={searchTerm}
                                 onChange={(e) => setSearchTerm(e.target.value)}
-                                className="bg-white/5 border border-white/10 rounded-xl py-2 pl-10 pr-4 text-sm focus:outline-none focus:ring-1 focus:ring-blue-500/50 w-64 transition-all"
+                                className="bg-white/5 border border-white/10 rounded-xl py-2 pl-10 pr-4 text-sm focus:outline-none focus:ring-1 focus:ring-emerald-500/50 w-64 transition-all"
                             />
                         </div>
                         <button
                             onClick={() => setIsAddModalOpen(true)}
-                            className="bg-blue-600 hover:bg-blue-500 text-white px-4 py-2 rounded-xl text-sm font-medium flex items-center gap-2 transition-all"
+                            className="bg-emerald-600 hover:bg-emerald-500 text-white px-4 py-2 rounded-xl text-sm font-medium flex items-center gap-2 transition-all"
                         >
                             <Plus size={16} />
                             Add Deal
@@ -337,7 +337,7 @@ export default function KanbanBoard({ initialData, dbId, onDisconnect }: KanbanP
                         <select
                             value={statusFilter}
                             onChange={(e) => setStatusFilter(e.target.value)}
-                            className="bg-white/5 border border-white/10 rounded-lg px-3 py-1 text-xs text-gray-300 focus:outline-none focus:ring-1 focus:ring-blue-500/30"
+                            className="bg-white/5 border border-white/10 rounded-lg px-3 py-1 text-xs text-gray-300 focus:outline-none focus:ring-1 focus:ring-emerald-500/30"
                         >
                             <option value="all">All Statuses</option>
                             {statusOptions.map((opt: any) => (
@@ -353,7 +353,7 @@ export default function KanbanBoard({ initialData, dbId, onDisconnect }: KanbanP
                             <select
                                 value={serviceFilter}
                                 onChange={(e) => setServiceFilter(e.target.value)}
-                                className="bg-white/5 border border-white/10 rounded-lg px-3 py-1 text-xs text-gray-300 focus:outline-none focus:ring-1 focus:ring-blue-500/30"
+                                className="bg-white/5 border border-white/10 rounded-lg px-3 py-1 text-xs text-gray-300 focus:outline-none focus:ring-1 focus:ring-emerald-500/30"
                             >
                                 <option value="all">All Services</option>
                                 {serviceOptions.map((opt: any) => (
@@ -470,8 +470,8 @@ function KanbanColumn({ status, items, onDrop, onCardClick, onDelete }: { status
                 <div className="flex items-center gap-2">
                     <div className={cn(
                         "w-2.5 h-2.5 rounded-full",
-                        status.color === "blue" ? "bg-blue-500" :
-                            status.color === "purple" ? "bg-purple-500" :
+                        status.color === "blue" ? "bg-emerald-500" :
+                            status.color === "purple" ? "bg-green-500" :
                                 status.color === "pink" ? "bg-pink-500" :
                                     status.color === "green" ? "bg-emerald-500" :
                                         status.color === "yellow" ? "bg-amber-500" :
@@ -529,7 +529,7 @@ function KanbanCard({ item, onClick, onDelete }: { item: any, onClick: () => voi
             whileHover={{ y: -2 }}
         >
             <div className="flex justify-between items-start mb-3">
-                <h4 className="font-semibold text-white group-hover:text-blue-400 transition-colors line-clamp-2">
+                <h4 className="font-semibold text-white group-hover:text-emerald-400 transition-colors line-clamp-2">
                     {name}
                 </h4>
                 <button
@@ -560,13 +560,13 @@ function KanbanCard({ item, onClick, onDelete }: { item: any, onClick: () => voi
             <div className="space-y-1.5 mb-4">
                 {phone && (
                     <div className="flex items-center gap-2 text-xs text-gray-400">
-                        <Phone size={12} className="text-blue-500/70" />
+                        <Phone size={12} className="text-emerald-500/70" />
                         {phone}
                     </div>
                 )}
                 {email && (
                     <div className="flex items-center gap-2 text-xs text-gray-400">
-                        <Mail size={12} className="text-purple-500/70" />
+                        <Mail size={12} className="text-green-500/70" />
                         <span className="truncate">{email}</span>
                     </div>
                 )}

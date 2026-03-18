@@ -58,7 +58,7 @@ export default function TableView({ items, properties, onCardClick }: TableViewP
                                 onClick={() => onCardClick(item)}
                             >
                                 <td className="p-4">
-                                    <span className="text-sm font-semibold text-white group-hover:text-blue-400 transition-colors">
+                                    <span className="text-sm font-semibold text-white group-hover:text-emerald-400 transition-colors">
                                         {item.properties[titlePropName]?.title?.[0]?.plain_text || "Untitled"}
                                     </span>
                                 </td>

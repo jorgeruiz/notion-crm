@@ -45,8 +45,8 @@ export default function Home() {
   return (
     <main className="min-h-screen relative overflow-hidden flex flex-col items-center justify-center p-6 bg-[#050505]">
       {/* Background Decorative Elements */}
-      <div className="absolute top-[-10%] left-[-10%] w-[40%] h-[40%] bg-blue-600/10 blur-[120px] rounded-full" />
-      <div className="absolute bottom-[-10%] right-[-10%] w-[40%] h-[40%] bg-purple-600/10 blur-[120px] rounded-full" />
+      <div className="absolute top-[-10%] left-[-10%] w-[40%] h-[40%] bg-emerald-600/10 blur-[120px] rounded-full" />
+      <div className="absolute bottom-[-10%] right-[-10%] w-[40%] h-[40%] bg-green-600/10 blur-[120px] rounded-full" />
 
       <AnimatePresence mode="wait">
         {!isConnected ? (
@@ -58,20 +58,20 @@ export default function Home() {
             transition={{ duration: 0.5, ease: "easeOut" }}
             className="z-10 w-full max-w-xl"
           >
-            <div className="text-center mb-12">
+            <div className="text-center mb-12 flex flex-col items-center">
               <motion.div
                 initial={{ scale: 0 }}
                 animate={{ scale: 1 }}
                 transition={{ delay: 0.2, type: "spring", stiffness: 200 }}
-                className="w-20 h-20 bg-gradient-to-br from-blue-500 to-purple-600 rounded-2xl flex items-center justify-center mx-auto mb-6 shadow-xl shadow-blue-500/20"
+                className="w-48 h-auto flex items-center justify-center mx-auto mb-6"
               >
-                <Kanban className="text-white w-10 h-10" />
+                <img src="/logo.png" alt="Click Society Logo" className="w-full h-auto object-contain drop-shadow-2xl" />
               </motion.div>
-              <h1 className="text-5xl md:text-6xl font-bold mb-4 tracking-tight">
-                Notion <span className="gradient-text">CRM Kanban</span>
+              <h1 className="text-4xl md:text-5xl font-bold mb-4 tracking-tight">
+                Click Society <span className="gradient-text text-emerald-500">Notion - CRM</span>
               </h1>
-              <p className="text-gray-400 text-lg">
-                Manage your projects and deals with a fluid, premium interface connected directly to your Notion workspace.
+              <p className="text-gray-400 text-lg max-w-2xl mx-auto">
+                Actualiza el listado de prospectos generados de tus campañas con Click Society. Mientras más información tengamos, más datos tienes para mejorar tu operación y tus ventas.
               </p>
             </div>
 
@@ -82,7 +82,7 @@ export default function Home() {
                     Database ID
                   </label>
                   <div className="relative group">
-                    <div className="absolute inset-y-0 left-0 pl-4 flex items-center pointer-events-none text-gray-400 group-focus-within:text-blue-500 transition-colors">
+                    <div className="absolute inset-y-0 left-0 pl-4 flex items-center pointer-events-none text-gray-400 group-focus-within:text-emerald-500 transition-colors">
                       <Database size={18} />
                     </div>
                     <input
@@ -90,7 +90,7 @@ export default function Home() {
                       value={databaseId}
                       onChange={(e) => setDatabaseId(e.target.value)}
                       placeholder="Enter your database ID..."
-                      className="w-full bg-black/40 border border-white/10 rounded-2xl py-4 pl-12 pr-4 text-white focus:outline-none focus:ring-2 focus:ring-blue-500/50 focus:border-blue-500/50 transition-all placeholder:text-gray-600"
+                      className="w-full bg-black/40 border border-white/10 rounded-2xl py-4 pl-12 pr-4 text-white focus:outline-none focus:ring-2 focus:ring-emerald-500/50 focus:border-emerald-500/50 transition-all placeholder:text-gray-600"
                     />
                   </div>
                   <p className="text-xs text-gray-500 ml-1">
