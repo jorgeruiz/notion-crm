@@ -1,65 +1,155 @@
-import Image from "next/image";
+"use client";
+
+import { useState } from "react";
+import { motion, AnimatePresence } from "framer-motion";
+import { Database, ArrowRight, Kanban, CheckCircle2, AlertCircle, Loader2 } from "lucide-react";
+import { cn } from "@/lib/utils";
+import KanbanBoard from "@/components/KanbanBoard";
 
 export default function Home() {
+  const [databaseId, setDatabaseId] = useState("");
+  const [isConnected, setIsConnected] = useState(false);
+  const [isLoading, setIsLoading] = useState(false);
+  const [error, setError] = useState("");
+  const [dbData, setDbData] = useState<any>(null);
+
+  const handleConnect = async (e: React.FormEvent) => {
+    e.preventDefault();
+    if (!databaseId.trim()) return;
+
+    setIsLoading(true);
+    setError("");
+
+    try {
+      const response = await fetch("/api/notion/fetch", {
+        method: "POST",
+        headers: { "Content-Type": "application/json" },
+        body: JSON.stringify({ databaseId }),
+      });
+
+      const data = await response.json();
+
+      if (response.ok) {
+        setDbData(data);
+        setIsConnected(true);
+      } else {
+        setError(data.error || "Failed to connect to Notion");
+      }
+    } catch (err) {
+      setError("An unexpected error occurred. Please check your Database ID.");
+    } finally {
+      setIsLoading(false);
+    }
+  };
+
   return (
-    <div className="flex min-h-screen items-center justify-center bg-zinc-50 font-sans dark:bg-black">
-      <main className="flex min-h-screen w-full max-w-3xl flex-col items-center justify-between py-32 px-16 bg-white dark:bg-black sm:items-start">
-        <Image
-          className="dark:invert"
-          src="/next.svg"
-          alt="Next.js logo"
-          width={100}
-          height={20}
-          priority
-        />
-        <div className="flex flex-col items-center gap-6 text-center sm:items-start sm:text-left">
-          <h1 className="max-w-xs text-3xl font-semibold leading-10 tracking-tight text-black dark:text-zinc-50">
-            To get started, edit the page.tsx file.
-          </h1>
-          <p className="max-w-md text-lg leading-8 text-zinc-600 dark:text-zinc-400">
-            Looking for a starting point or more instructions? Head over to{" "}
-            <a
-              href="https://vercel.com/templates?framework=next.js&utm_source=create-next-app&utm_medium=appdir-template-tw&utm_campaign=create-next-app"
-              className="font-medium text-zinc-950 dark:text-zinc-50"
-            >
-              Templates
-            </a>{" "}
-            or the{" "}
-            <a
-              href="https://nextjs.org/learn?utm_source=create-next-app&utm_medium=appdir-template-tw&utm_campaign=create-next-app"
-              className="font-medium text-zinc-950 dark:text-zinc-50"
-            >
-              Learning
-            </a>{" "}
-            center.
-          </p>
-        </div>
-        <div className="flex flex-col gap-4 text-base font-medium sm:flex-row">
-          <a
-            className="flex h-12 w-full items-center justify-center gap-2 rounded-full bg-foreground px-5 text-background transition-colors hover:bg-[#383838] dark:hover:bg-[#ccc] md:w-[158px]"
-            href="https://vercel.com/new?utm_source=create-next-app&utm_medium=appdir-template-tw&utm_campaign=create-next-app"
-            target="_blank"
-            rel="noopener noreferrer"
+    <main className="min-h-screen relative overflow-hidden flex flex-col items-center justify-center p-6 bg-[#050505]">
+      {/* Background Decorative Elements */}
+      <div className="absolute top-[-10%] left-[-10%] w-[40%] h-[40%] bg-blue-600/10 blur-[120px] rounded-full" />
+      <div className="absolute bottom-[-10%] right-[-10%] w-[40%] h-[40%] bg-purple-600/10 blur-[120px] rounded-full" />
+
+      <AnimatePresence mode="wait">
+        {!isConnected ? (
+          <motion.div
+            key="landing"
+            initial={{ opacity: 0, y: 20 }}
+            animate={{ opacity: 1, y: 0 }}
+            exit={{ opacity: 0, scale: 0.95 }}
+            transition={{ duration: 0.5, ease: "easeOut" }}
+            className="z-10 w-full max-w-xl"
           >
-            <Image
-              className="dark:invert"
-              src="/vercel.svg"
-              alt="Vercel logomark"
-              width={16}
-              height={16}
+            <div className="text-center mb-12">
+              <motion.div
+                initial={{ scale: 0 }}
+                animate={{ scale: 1 }}
+                transition={{ delay: 0.2, type: "spring", stiffness: 200 }}
+                className="w-20 h-20 bg-gradient-to-br from-blue-500 to-purple-600 rounded-2xl flex items-center justify-center mx-auto mb-6 shadow-xl shadow-blue-500/20"
+              >
+                <Kanban className="text-white w-10 h-10" />
+              </motion.div>
+              <h1 className="text-5xl md:text-6xl font-bold mb-4 tracking-tight">
+                Notion <span className="gradient-text">CRM Kanban</span>
+              </h1>
+              <p className="text-gray-400 text-lg">
+                Manage your projects and deals with a fluid, premium interface connected directly to your Notion workspace.
+              </p>
+            </div>
+
+            <div className="glass-card p-8 rounded-3xl">
+              <form onSubmit={handleConnect} className="space-y-6">
+                <div className="space-y-2">
+                  <label className="text-sm font-medium text-gray-300 ml-1">
+                    Database ID
+                  </label>
+                  <div className="relative group">
+                    <div className="absolute inset-y-0 left-0 pl-4 flex items-center pointer-events-none text-gray-400 group-focus-within:text-blue-500 transition-colors">
+                      <Database size={18} />
+                    </div>
+                    <input
+                      type="text"
+                      value={databaseId}
+                      onChange={(e) => setDatabaseId(e.target.value)}
+                      placeholder="Enter your database ID..."
+                      className="w-full bg-black/40 border border-white/10 rounded-2xl py-4 pl-12 pr-4 text-white focus:outline-none focus:ring-2 focus:ring-blue-500/50 focus:border-blue-500/50 transition-all placeholder:text-gray-600"
+                    />
+                  </div>
+                  <p className="text-xs text-gray-500 ml-1">
+                    You can find this in your database URL: <code>notion.so/workspace/[database_id]?v=...</code>
+                  </p>
+                </div>
+
+                {error && (
+                  <motion.div
+                    initial={{ opacity: 0, height: 0 }}
+                    animate={{ opacity: 1, height: "auto" }}
+                    className="flex items-center gap-2 text-red-400 bg-red-400/10 p-4 rounded-xl text-sm border border-red-400/20"
+                  >
+                    <AlertCircle size={16} />
+                    {error}
+                  </motion.div>
+                )}
+
+                <button
+                  type="submit"
+                  disabled={isLoading}
+                  className="w-full bg-white text-black font-semibold py-4 rounded-2xl flex items-center justify-center gap-2 hover:bg-gray-200 transition-all disabled:opacity-50 disabled:cursor-not-allowed group active:scale-[0.98]"
+                >
+                  {isLoading ? (
+                    <Loader2 className="animate-spin" size={20} />
+                  ) : (
+                    <>
+                      Connect Database
+                      <ArrowRight className="group-hover:translate-x-1 transition-transform" size={20} />
+                    </>
+                  )}
+                </button>
+              </form>
+            </div>
+
+            <div className="mt-8 flex items-center justify-center gap-6 text-gray-500 text-sm">
+              <span className="flex items-center gap-1.5">
+                <CheckCircle2 size={14} className="text-green-500" /> Secure Integration
+              </span>
+              <span className="flex items-center gap-1.5">
+                <CheckCircle2 size={14} className="text-green-500" /> Real-time Sync
+              </span>
+            </div>
+          </motion.div>
+        ) : (
+          <motion.div
+            key="board"
+            initial={{ opacity: 0, x: 20 }}
+            animate={{ opacity: 1, x: 0 }}
+            className="z-10 w-full h-full flex flex-col"
+          >
+            <KanbanBoard
+              initialData={dbData}
+              dbId={databaseId}
+              onDisconnect={() => setIsConnected(false)}
             />
-            Deploy Now
-          </a>
-          <a
-            className="flex h-12 w-full items-center justify-center rounded-full border border-solid border-black/[.08] px-5 transition-colors hover:border-transparent hover:bg-black/[.04] dark:border-white/[.145] dark:hover:bg-[#1a1a1a] md:w-[158px]"
-            href="https://nextjs.org/docs?utm_source=create-next-app&utm_medium=appdir-template-tw&utm_campaign=create-next-app"
-            target="_blank"
-            rel="noopener noreferrer"
-          >
-            Documentation
-          </a>
-        </div>
-      </main>
-    </div>
+          </motion.div>
+        )}
+      </AnimatePresence>
+    </main>
   );
 }
