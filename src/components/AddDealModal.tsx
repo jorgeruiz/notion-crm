@@ -22,8 +22,12 @@ export default function AddDealModal({
     const [isSubmitting, setIsSubmitting] = useState(false);
     const [formData, setFormData] = useState<Record<string, any>>({});
 
-    // Get status options for default value
-    const statusProp = Object.values(properties).find((p: any) => p.type === "status" || p.type === "select") as any;
+    // Find the Status property — prioritize native "status" type, then a "select" named "status", then any select
+    const statusProp = (
+        Object.values(properties).find((p: any) => p.type === "status") ||
+        Object.values(properties).find((p: any) => p.type === "select" && p.name.toLowerCase() === "status") ||
+        Object.values(properties).find((p: any) => p.type === "select")
+    ) as any;
     const statusPropName = statusProp?.name;
     const statusOptions = statusProp ? (statusProp.status?.options || statusProp.select?.options || []) : [];
 

@@ -51,17 +51,20 @@ export default function KanbanBoard({ initialData, dbId, onDisconnect }: KanbanP
     const title = data.title;
     const properties = data.properties || {};
 
-    // Find a suitable property for columns (Status or Select)
-    const statusProp = Object.values(properties).find((p: any) => p.type === "status" || p.type === "select") as any;
+    // Find the Status property — prioritize native "status" type, then a "select" named "status", then any select
+    const statusProp = (
+        Object.values(properties).find((p: any) => p.type === "status") ||
+        Object.values(properties).find((p: any) => p.type === "select" && p.name.toLowerCase() === "status") ||
+        Object.values(properties).find((p: any) => p.type === "select")
+    ) as any;
 
     const statusOptions = statusProp ? (statusProp.status?.options || statusProp.select?.options || []) : [];
     const statusPropName = statusProp?.name || "";
 
-    // Find Service property
+    // Find Service property — match only by name to avoid accidentally picking up status/select fields
     const serviceProp = Object.values(properties).find((p: any) =>
         p.name.toLowerCase().includes("service") ||
-        p.name.toLowerCase().includes("servicio") ||
-        p.type === "select" && p.name !== statusPropName
+        p.name.toLowerCase().includes("servicio")
     ) as any;
     const servicePropName = serviceProp?.name;
     const serviceOptions = serviceProp?.select?.options || [];
